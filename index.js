@@ -1,3 +1,4 @@
+
 require("dotenv").config();
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const express = require("express");
@@ -8,9 +9,14 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors());
-// { origin: "*", credentials: true }
+app.use(
+  cors({
+    origin: ["https://task-management-scic.netlify.app", "http://localhost:5173"],
+  })
+);
+
 // MongoDB Connection
+
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.gamza.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 const client = new MongoClient(uri, {
   serverApi: {
